@@ -1,26 +1,10 @@
-'''Пользователь вводит строку текста.
-✔ Подсчитайте сколько раз встречается
-каждая буква в строке без использования
-метода count и с ним.
-✔ Результат сохраните в словаре, где ключ —
-символ, а значение — частота встречи
-символа в строке.'''
+'''Дан список повторяющихся элементов. Вернуть список
+с дублирующимися элементами. В результирующем списке
+не должно быть дубликатов'''
 
-text = input('Введите с троку текста:')
-chars = text.replace(' ', '').replace('-', '').replace(',', '') \
-    .replace('.', '').replace('!', '').replace('?', '')
-# c count
-dict1 = {}
-for i in chars:
-    dict1.setdefault(i, chars.count(i))
-print(dict1)
-# без count
-dict2 = {}
-dict3 = {}
-for i in chars:
-    t = dict2.setdefault(i, list())
-    t.append(i)
-print(dict2)
-for i, j in dict2.items():
-    dict3.setdefault(i, len(j))
-print(dict3)
+my_list = [5,13, -6, 11, 4, 5, 8, 11, 4, 5, 7, 4, -6, 5, 2, ]
+unic = set()
+for i in my_list:
+    if my_list.count(i) > 1:
+        unic.add(i)
+print(f'Cписок дублирующиxся элементов списка {my_list}:\n {list(unic)}')
