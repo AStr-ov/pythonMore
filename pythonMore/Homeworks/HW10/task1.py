@@ -40,22 +40,18 @@ class Factory:
         self.type_water = type_water
         self.flying = flying
 
-    def ident(class_name, name, type_water=None, flying=None):
-        if class_name == 'Fish':
-            inst = Fish(name, type_water)
-        if class_name == 'Birds':
-            inst = Birds(name, flying)
+    def ident(self):
+        if self.class_name == 'Fish':
+            inst = Fish(self.name, self.type_water)
+        if self.class_name == 'Birds':
+            inst = Birds(self.name, self.flying)
         return inst
 
 
 if __name__ == '__main__':
-    catfish = Factory.ident('Fish', 'Catfish', "River", None)
-    macrel = Factory.ident('Fish', 'Macrel', "Sea", None)
-    eagle = Factory.ident('Birds', 'Eagle', None, 'Fly')
-    heck = Factory.ident('Fish', 'Heck', "Sea", None)
-    chicken = Factory.ident('Birds', 'Chicken', None, 'Not fly')
-
-    print(f'{type(eagle)= }, {eagle.info_bird()}, {eagle.characteristic_bird}, {eagle.characteristic}')
-    print(f'{type(heck)= }, {heck.info_fish()}, {heck.characteristic_fish}, {eagle.characteristic}')
-    print(f'{type(chicken)= }, {chicken.info_bird()}, {chicken.characteristic_bird}, {eagle.characteristic}')
-    print(f'{type(catfish)= }, {catfish.info_fish()}, {catfish.characteristic_fish}, {eagle.characteristic}')
+    t = Factory('Fish', 'Macrel', "Sea")
+    macrel = t.ident()
+    t = Factory('Birds', 'Chicken', None, 'Not fly')
+    chicken = t.ident()
+    print(f'{type(macrel)= }, {macrel.info_fish()}, {macrel.characteristic_fish}, {macrel.characteristic}')
+    print(f'{type(chicken)= }, {chicken.info_bird()}, {chicken.characteristic_bird}, {chicken.characteristic}')
