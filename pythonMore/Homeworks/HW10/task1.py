@@ -12,9 +12,12 @@ class Animal:
 
 
 class Fish(Animal):
-    def __init__(self, name, salt_or_fresh):
+    def __init__(self, name, type_water):
         super(Fish, self).__init__(name)
-        self.salt_or_fresh = salt_or_fresh
+        self.type_water = type_water
+
+    def info_fish(self):
+        return f'{self.name}, {self.type_water}'
 
     characteristic_fish = 'Дышит жабрами'
 
@@ -24,21 +27,35 @@ class Birds(Animal):
         super(Birds, self).__init__(name)
         self.flying = flying
 
+    def info_bird(self):
+        return f'{self.name}, {self.flying}'
+
     characteristic_bird = 'Пернатое'
 
 
-class Factory(Fish):
-    def __init__(self, name, salt_or_fresh, size):
-        super(Factory, self).__init__(name, salt_or_fresh)
-        self.size = size
+class Factory:
+    def __init__(self, class_name, name, type_water=None, flying=None):
+        self.class_name = class_name
+        self.name = name
+        self.type_water = type_water
+        self.flying = flying
 
-    dor = Fish('Дорадо', "морская")
+    def ident(class_name, name, type_water=None, flying=None):
+        if class_name == 'Fish':
+            inst = Fish(name, type_water)
+        if class_name == 'Birds':
+            inst = Birds(name, flying)
+        return inst
 
-    def info(self):
-        return f'{self.name}, {self.salt_or_fresh}, {self.size}'
 
+if __name__ == '__main__':
+    catfish = Factory.ident('Fish', 'Catfish', "River", None)
+    macrel = Factory.ident('Fish', 'Macrel', "Sea", None)
+    eagle = Factory.ident('Birds', 'Eagle', None, 'Fly')
+    heck = Factory.ident('Fish', 'Heck', "Sea", None)
+    chicken = Factory.ident('Birds', 'Chicken', None, 'Not fly')
 
-som = Factory('Сом', "пресноводная", 'крупная')
-
-print(som.info())
-print(f'{Factory.dor.name}, {Factory.dor.salt_or_fresh}, {Factory.dor.characteristic}, {Factory.dor.characteristic_fish}')
+    print(f'{type(eagle)= }, {eagle.info_bird()}, {eagle.characteristic_bird}, {eagle.characteristic}')
+    print(f'{type(heck)= }, {heck.info_fish()}, {heck.characteristic_fish}, {eagle.characteristic}')
+    print(f'{type(chicken)= }, {chicken.info_bird()}, {chicken.characteristic_bird}, {eagle.characteristic}')
+    print(f'{type(catfish)= }, {catfish.info_fish()}, {catfish.characteristic_fish}, {eagle.characteristic}')
